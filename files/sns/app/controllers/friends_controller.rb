@@ -13,7 +13,7 @@ class FriendsController < ApplicationController
     friend_ids = @current_user.friends_from_user_ids + @current_user.friends_to_user_ids
     friend_ids.uniq!
     render json: {} and return if friend_ids.empty?
-    friends = User.where("id IN (#{friend_ids.join(', ')})").order('id DESC')
+    friends = User.where(id: friend_ids).order('id DESC')
     render json: {friends: friends} and return
   end
 end
